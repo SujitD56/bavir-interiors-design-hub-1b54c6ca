@@ -1,4 +1,6 @@
 import { ArrowUp } from "lucide-react";
+import { motion } from "framer-motion";
+import bavirLogo from "@/assets/bavir-logo.png";
 
 const footerLinks = {
   company: [
@@ -32,7 +34,12 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <h3 className="font-heading text-2xl font-semibold mb-4">Bavir Interiors</h3>
+            <motion.img 
+              src={bavirLogo} 
+              alt="Bavir Interiors Logo" 
+              className="h-20 w-auto mb-4 brightness-0 invert"
+              whileHover={{ scale: 1.05 }}
+            />
             <p className="text-background/70 font-body text-sm leading-relaxed mb-6">
               Transforming spaces into timeless interiors since 2010. 
               Experience the art of luxury living with our bespoke design solutions.
@@ -43,15 +50,21 @@ export function Footer() {
           <div>
             <h4 className="font-heading font-medium mb-4">Company</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
+              {footerLinks.company.map((link, index) => (
+                <motion.li
+                  key={link.label}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
                   <a
                     href={link.href}
-                    className="text-background/70 hover:text-background transition-colors font-body text-sm"
+                    className="text-background/70 hover:text-bronze transition-colors font-body text-sm"
                   >
                     {link.label}
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
@@ -60,15 +73,21 @@ export function Footer() {
           <div>
             <h4 className="font-heading font-medium mb-4">Services</h4>
             <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
-                <li key={link.label}>
+              {footerLinks.services.map((link, index) => (
+                <motion.li
+                  key={link.label}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
                   <a
                     href={link.href}
-                    className="text-background/70 hover:text-background transition-colors font-body text-sm"
+                    className="text-background/70 hover:text-bronze transition-colors font-body text-sm"
                   >
                     {link.label}
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
@@ -77,15 +96,21 @@ export function Footer() {
           <div>
             <h4 className="font-heading font-medium mb-4">Connect</h4>
             <ul className="space-y-3">
-              {footerLinks.connect.map((link) => (
-                <li key={link.label}>
+              {footerLinks.connect.map((link, index) => (
+                <motion.li
+                  key={link.label}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
                   <a
                     href={link.href}
-                    className="text-background/70 hover:text-background transition-colors font-body text-sm"
+                    className="text-background/70 hover:text-bronze transition-colors font-body text-sm"
                   >
                     {link.label}
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
@@ -96,13 +121,15 @@ export function Footer() {
           <p className="text-background/60 font-body text-sm">
             © {new Date().getFullYear()} Bavir Interiors. All rights reserved.
           </p>
-          <button
+          <motion.button
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-background/60 hover:text-background transition-colors font-body text-sm group"
+            className="flex items-center gap-2 text-background/60 hover:text-bronze transition-colors font-body text-sm group"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             Back to top
             <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
-          </button>
+          </motion.button>
         </div>
       </div>
     </footer>

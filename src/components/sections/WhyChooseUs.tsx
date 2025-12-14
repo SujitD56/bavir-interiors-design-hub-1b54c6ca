@@ -1,4 +1,6 @@
 import { Sparkles, Shield, Clock, IndianRupee, HeartHandshake } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const reasons = [
   {
@@ -28,68 +30,128 @@ const reasons = [
   },
 ];
 
+const stats = [
+  { value: "14+", label: "Years of Excellence" },
+  { value: "250+", label: "Happy Clients" },
+  { value: "15", label: "Design Awards" },
+  { value: "50+", label: "Team Members" },
+  { value: "8", label: "Cities Served" },
+];
+
 export function WhyChooseUs() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section className="section-padding">
+    <section className="section-padding" ref={ref}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <div>
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block font-body">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block font-body"
+            >
               Why Bavir
-            </span>
-            <h2 className="section-title mb-6">
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="section-title mb-6"
+            >
               Why Choose Bavir Interiors?
-            </h2>
-            <p className="section-subtitle mb-10">
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="section-subtitle mb-10"
+            >
               We combine creativity, expertise, and dedication to deliver interior design solutions 
               that transform your vision into a beautiful reality.
-            </p>
+            </motion.p>
 
             <div className="space-y-6">
-              {reasons.map((reason) => (
-                <div key={reason.title} className="flex gap-4 group">
-                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-border group-hover:border-bronze group-hover:text-bronze transition-colors duration-300">
+              {reasons.map((reason, index) => (
+                <motion.div
+                  key={reason.title}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  className="flex gap-4 group"
+                >
+                  <motion.div
+                    className="flex-shrink-0 w-12 h-12 flex items-center justify-center border border-border group-hover:border-bronze group-hover:text-bronze transition-colors duration-300"
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                  >
                     <reason.icon size={20} strokeWidth={1.5} />
-                  </div>
+                  </motion.div>
                   <div>
                     <h3 className="font-heading text-lg font-medium mb-1">{reason.title}</h3>
                     <p className="text-sm text-muted-foreground font-body">{reason.description}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
 
           {/* Decorative Stats Card */}
-          <div className="relative">
-            <div className="bg-card border border-border p-12">
-              <div className="text-center mb-8">
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="relative"
+          >
+            <motion.div
+              className="bg-card border border-border p-12"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div
+                className="text-center mb-8"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                transition={{ delay: 0.6, duration: 0.5, type: "spring" }}
+              >
                 <span className="font-heading text-6xl lg:text-7xl font-light text-bronze">14+</span>
                 <p className="text-muted-foreground font-body mt-2">Years of Excellence</p>
-              </div>
+              </motion.div>
               <div className="grid grid-cols-2 gap-8 pt-8 border-t border-border">
-                <div className="text-center">
-                  <span className="font-heading text-3xl font-medium">250+</span>
-                  <p className="text-sm text-muted-foreground font-body mt-1">Happy Clients</p>
-                </div>
-                <div className="text-center">
-                  <span className="font-heading text-3xl font-medium">15</span>
-                  <p className="text-sm text-muted-foreground font-body mt-1">Design Awards</p>
-                </div>
-                <div className="text-center">
-                  <span className="font-heading text-3xl font-medium">50+</span>
-                  <p className="text-sm text-muted-foreground font-body mt-1">Team Members</p>
-                </div>
-                <div className="text-center">
-                  <span className="font-heading text-3xl font-medium">8</span>
-                  <p className="text-sm text-muted-foreground font-body mt-1">Cities Served</p>
-                </div>
+                {[
+                  { value: "250+", label: "Happy Clients" },
+                  { value: "15", label: "Design Awards" },
+                  { value: "50+", label: "Team Members" },
+                  { value: "8", label: "Cities Served" },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    className="text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.7 + index * 0.1, duration: 0.4 }}
+                  >
+                    <motion.span
+                      className="font-heading text-3xl font-medium block"
+                      whileHover={{ scale: 1.1, color: "hsl(var(--bronze))" }}
+                    >
+                      {stat.value}
+                    </motion.span>
+                    <p className="text-sm text-muted-foreground font-body mt-1">{stat.label}</p>
+                  </motion.div>
+                ))}
               </div>
-            </div>
+            </motion.div>
             {/* Decorative Element */}
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-bronze -z-10" />
-          </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-bronze -z-10"
+            />
+          </motion.div>
         </div>
       </div>
     </section>

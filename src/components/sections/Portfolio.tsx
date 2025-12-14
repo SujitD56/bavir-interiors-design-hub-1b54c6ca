@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import projectBedroom from "@/assets/project-bedroom.jpg";
 import projectKitchen from "@/assets/project-kitchen.jpg";
 import projectOffice from "@/assets/project-office.jpg";
@@ -54,31 +55,57 @@ const projects = [
 
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const filteredProjects = projects.filter(
     (project) => activeCategory === "All" || project.category === activeCategory
   );
 
   return (
-    <section id="portfolio" className="section-padding bg-secondary">
+    <section id="portfolio" className="section-padding bg-secondary" ref={ref}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block font-body">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block font-body"
+          >
             Our Work
-          </span>
-          <h2 className="section-title mb-4">Featured Projects</h2>
-          <p className="section-subtitle mx-auto">
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="section-title mb-4"
+          >
+            Featured Projects
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="section-subtitle mx-auto"
+          >
             Explore our portfolio of thoughtfully designed spaces that reflect our commitment to excellence.
-          </p>
+          </motion.p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex justify-center gap-6 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex justify-center gap-6 mb-12"
+        >
           {categories.map((category) => (
-            <button
+            <motion.button
               key={category}
               onClick={() => setActiveCategory(category)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className={`text-sm font-body tracking-wide pb-2 transition-all duration-300 relative ${
                 activeCategory === category
                   ? "text-foreground"
@@ -87,43 +114,67 @@ export function Portfolio() {
             >
               {category}
               {activeCategory === category && (
-                <span className="absolute bottom-0 left-0 w-full h-px bg-foreground" />
+                <motion.span
+                  layoutId="activeTab"
+                  className="absolute bottom-0 left-0 w-full h-px bg-bronze"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
               )}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="group cursor-pointer overflow-hidden"
-            >
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={`${project.title} - Interior design project by Bavir Interiors in ${project.location}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500" />
-                <div className="absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <span className="text-xs uppercase tracking-widest text-background/80 block mb-2 font-body">
-                      {project.category}
-                    </span>
-                    <h3 className="font-heading text-xl text-background font-medium">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-background/80 font-body mt-1">
-                      {project.location}
-                    </p>
-                  </div>
+        <motion.div
+          layout
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                className="group cursor-pointer overflow-hidden"
+              >
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <motion.img
+                    src={project.image}
+                    alt={`${project.title} - Interior design project by Bavir Interiors in ${project.location}`}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.7 }}
+                  />
+                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500" />
+                  <motion.div
+                    className="absolute inset-0 flex items-end p-6"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                  >
+                    <motion.div
+                      initial={{ y: 20 }}
+                      whileHover={{ y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="text-xs uppercase tracking-widest text-background/80 block mb-2 font-body">
+                        {project.category}
+                      </span>
+                      <h3 className="font-heading text-xl text-background font-medium">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-background/80 font-body mt-1">
+                        {project.location}
+                      </p>
+                    </motion.div>
+                  </motion.div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

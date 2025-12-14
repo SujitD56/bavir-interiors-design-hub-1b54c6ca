@@ -1,4 +1,6 @@
 import { Home, Building2, ChefHat, Hammer, Armchair, Palette } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const services = [
   {
@@ -33,39 +35,87 @@ const services = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
+
 export function Services() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section id="services" className="section-padding">
+    <section id="services" className="section-padding" ref={ref}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block font-body">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block font-body"
+          >
             What We Offer
-          </span>
-          <h2 className="section-title mb-4">Our Services</h2>
-          <p className="section-subtitle mx-auto">
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="section-title mb-4"
+          >
+            Our Services
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="section-subtitle mx-auto"
+          >
             Comprehensive interior design solutions tailored to meet your unique needs and exceed your expectations.
-          </p>
+          </motion.p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {services.map((service) => (
+            <motion.div
               key={service.title}
-              className="group p-8 bg-card border border-border hover:border-bronze/50 transition-all duration-500 hover-lift"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              variants={cardVariants}
+              whileHover={{ y: -10, transition: { duration: 0.3 } }}
+              className="group p-8 bg-card border border-border hover:border-bronze/50 transition-all duration-500"
             >
-              <div className="w-12 h-12 flex items-center justify-center border border-border group-hover:border-bronze group-hover:text-bronze transition-colors duration-300 mb-6">
+              <motion.div
+                className="w-12 h-12 flex items-center justify-center border border-border group-hover:border-bronze group-hover:text-bronze transition-colors duration-300 mb-6"
+                whileHover={{ rotate: 5, scale: 1.05 }}
+              >
                 <service.icon size={24} strokeWidth={1.5} />
-              </div>
+              </motion.div>
               <h3 className="font-heading text-xl font-medium mb-3">{service.title}</h3>
               <p className="text-muted-foreground font-body text-sm leading-relaxed">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

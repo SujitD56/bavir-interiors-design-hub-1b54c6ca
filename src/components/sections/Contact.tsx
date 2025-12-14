@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 export function Contact() {
   const { toast } = useToast();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,12 +29,39 @@ export function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: "Visit Our Studio",
+      lines: ["123 Design District, Bandra West", "Mumbai, Maharashtra 400050"],
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      lines: ["+91 98765 43210", "+91 22 1234 5678"],
+    },
+    {
+      icon: Mail,
+      title: "Email Us",
+      lines: ["hello@bavirinteriors.com", "projects@bavirinteriors.com"],
+    },
+    {
+      icon: Clock,
+      title: "Working Hours",
+      lines: ["Monday - Saturday: 10:00 AM - 7:00 PM", "Sunday: By Appointment Only"],
+    },
+  ];
+
   return (
-    <section id="contact" className="section-padding bg-secondary">
+    <section id="contact" className="section-padding bg-secondary" ref={ref}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Form */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
             <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block font-body">
               Get In Touch
             </span>
@@ -45,7 +75,11 @@ export function Contact() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-6">
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.2 }}
+                >
                   <label htmlFor="name" className="block text-sm font-body mb-2">Full Name *</label>
                   <input
                     type="text"
@@ -57,8 +91,12 @@ export function Contact() {
                     className="w-full px-4 py-3 bg-background border border-border focus:border-bronze focus:outline-none transition-colors font-body"
                     placeholder="Your name"
                   />
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.25 }}
+                >
                   <label htmlFor="email" className="block text-sm font-body mb-2">Email Address *</label>
                   <input
                     type="email"
@@ -70,11 +108,15 @@ export function Contact() {
                     className="w-full px-4 py-3 bg-background border border-border focus:border-bronze focus:outline-none transition-colors font-body"
                     placeholder="your@email.com"
                   />
-                </div>
+                </motion.div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-6">
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.3 }}
+                >
                   <label htmlFor="phone" className="block text-sm font-body mb-2">Phone Number *</label>
                   <input
                     type="tel"
@@ -86,8 +128,12 @@ export function Contact() {
                     className="w-full px-4 py-3 bg-background border border-border focus:border-bronze focus:outline-none transition-colors font-body"
                     placeholder="+91 98765 43210"
                   />
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.35 }}
+                >
                   <label htmlFor="projectType" className="block text-sm font-body mb-2">Project Type *</label>
                   <select
                     id="projectType"
@@ -104,10 +150,14 @@ export function Contact() {
                     <option value="turnkey">Turnkey Solution</option>
                     <option value="consultation">Design Consultation</option>
                   </select>
-                </div>
+                </motion.div>
               </div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.4 }}
+              >
                 <label htmlFor="message" className="block text-sm font-body mb-2">Your Message</label>
                 <textarea
                   id="message"
@@ -118,82 +168,83 @@ export function Contact() {
                   className="w-full px-4 py-3 bg-background border border-border focus:border-bronze focus:outline-none transition-colors font-body resize-none"
                   placeholder="Tell us about your project..."
                 />
-              </div>
+              </motion.div>
 
-              <Button type="submit" variant="luxury" size="xl" className="w-full sm:w-auto">
-                Book Free Consultation
-              </Button>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.45 }}
+              >
+                <Button type="submit" variant="luxury" size="xl" className="w-full sm:w-auto">
+                  Book Free Consultation
+                </Button>
+              </motion.div>
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div className="lg:pl-8">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="lg:pl-8"
+          >
             <div className="bg-foreground text-background p-10 h-full">
               <h3 className="font-heading text-2xl font-medium mb-8">Contact Information</h3>
               
               <div className="space-y-8">
-                <div className="flex gap-4">
-                  <MapPin size={24} className="flex-shrink-0 text-background/60" />
-                  <div>
-                    <h4 className="font-heading font-medium mb-1">Visit Our Studio</h4>
-                    <p className="text-background/70 font-body text-sm">
-                      123 Design District, Bandra West<br />
-                      Mumbai, Maharashtra 400050
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <Phone size={24} className="flex-shrink-0 text-background/60" />
-                  <div>
-                    <h4 className="font-heading font-medium mb-1">Call Us</h4>
-                    <p className="text-background/70 font-body text-sm">
-                      +91 98765 43210<br />
-                      +91 22 1234 5678
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <Mail size={24} className="flex-shrink-0 text-background/60" />
-                  <div>
-                    <h4 className="font-heading font-medium mb-1">Email Us</h4>
-                    <p className="text-background/70 font-body text-sm">
-                      hello@bavirinteriors.com<br />
-                      projects@bavirinteriors.com
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <Clock size={24} className="flex-shrink-0 text-background/60" />
-                  <div>
-                    <h4 className="font-heading font-medium mb-1">Working Hours</h4>
-                    <p className="text-background/70 font-body text-sm">
-                      Monday - Saturday: 10:00 AM - 7:00 PM<br />
-                      Sunday: By Appointment Only
-                    </p>
-                  </div>
-                </div>
+                {contactInfo.map((info, index) => (
+                  <motion.div
+                    key={info.title}
+                    className="flex gap-4"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.4 + index * 0.1 }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <info.icon size={24} className="flex-shrink-0 text-bronze" />
+                    </motion.div>
+                    <div>
+                      <h4 className="font-heading font-medium mb-1">{info.title}</h4>
+                      {info.lines.map((line, i) => (
+                        <p key={i} className="text-background/70 font-body text-sm">
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
 
               {/* Social Links */}
-              <div className="mt-12 pt-8 border-t border-background/20">
+              <motion.div
+                className="mt-12 pt-8 border-t border-background/20"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ delay: 0.8 }}
+              >
                 <p className="text-sm text-background/60 font-body mb-4">Follow Us</p>
                 <div className="flex gap-4">
-                  {["Instagram", "Facebook", "Pinterest", "LinkedIn"].map((social) => (
-                    <a
+                  {["Instagram", "Facebook", "Pinterest", "LinkedIn"].map((social, index) => (
+                    <motion.a
                       key={social}
                       href="#"
-                      className="text-sm text-background/70 hover:text-background transition-colors font-body"
+                      className="text-sm text-background/70 hover:text-bronze transition-colors font-body"
+                      whileHover={{ y: -3 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ delay: 0.9 + index * 0.05 }}
                     >
                       {social}
-                    </a>
+                    </motion.a>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
