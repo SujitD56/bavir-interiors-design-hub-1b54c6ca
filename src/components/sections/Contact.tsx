@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { motion, useInView } from "framer-motion";
+import { ChevronDown } from "lucide-react"
 
 export function Contact() {
   const { toast } = useToast();
@@ -33,12 +34,12 @@ export function Contact() {
     {
       icon: MapPin,
       title: "Visit Our Studio",
-      lines: ["123 Design District, Bandra West", "Mumbai, Maharashtra 400050"],
+      lines: ["No.45, Kanakapura Main Rd, opp. metro pillar no.46, Banashankari Temple Ward, Bengaluru, Karnataka 560078"],
     },
     {
       icon: Phone,
       title: "Call Us",
-      lines: ["+91 98765 43210", "+91 22 1234 5678"],
+      lines: ["+91 8296372402", "+91 7975229303"],
     },
     {
       icon: Mail,
@@ -126,7 +127,7 @@ export function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-background border border-border focus:border-bronze focus:outline-none transition-colors font-body"
-                    placeholder="+91 98765 43210"
+                    placeholder="98765 43210"
                   />
                 </motion.div>
                 <motion.div
@@ -134,22 +135,39 @@ export function Contact() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.35 }}
                 >
-                  <label htmlFor="projectType" className="block text-sm font-body mb-2">Project Type *</label>
-                  <select
-                    id="projectType"
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-background border border-border focus:border-bronze focus:outline-none transition-colors font-body appearance-none"
+                  <label
+                    htmlFor="projectType"
+                    className="block text-sm font-body mb-2"
                   >
-                    <option value="">Select project type</option>
-                    <option value="residential">Residential</option>
-                    <option value="commercial">Commercial</option>
-                    <option value="modular">Modular Kitchen/Wardrobe</option>
-                    <option value="turnkey">Turnkey Solution</option>
-                    <option value="consultation">Design Consultation</option>
-                  </select>
+                    Project Type <span className="text-red-500">*</span>
+                  </label>
+
+                  <div className="relative">
+                    <select
+                      id="projectType"
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 pr-10 bg-background border border-border
+                 focus:border-bronze focus:outline-none transition-colors
+                 font-body appearance-none"
+                    >
+                      <option value="">Select project type</option>
+                      <option value="residential">Residential</option>
+                      <option value="commercial">Commercial</option>
+                      <option value="modular">Modular Kitchen/Wardrobe</option>
+                      <option value="turnkey">Turnkey Solution</option>
+                      <option value="consultation">Design Consultation</option>
+                    </select>
+
+                    {/* Down arrow icon */}
+                    <ChevronDown
+                      size={18}
+                      className="absolute right-4 top-1/2 -translate-y-1/2
+                 text-muted-foreground pointer-events-none"
+                    />
+                  </div>
                 </motion.div>
               </div>
 

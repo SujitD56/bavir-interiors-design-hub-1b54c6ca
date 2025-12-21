@@ -12,7 +12,6 @@ import { Footer } from "@/components/layout/Footer";
 const Index = () => {
   return (
     <main className="overflow-x-hidden">
-      <Navbar />
       <Hero />
       <About />
       <Services />
@@ -21,7 +20,6 @@ const Index = () => {
       <Testimonials />
       <WhyChooseUs />
       <Contact />
-      <Footer />
     </main>
   );
 };

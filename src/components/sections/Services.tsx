@@ -6,32 +6,44 @@ const services = [
   {
     icon: Home,
     title: "Residential Interior Design",
-    description: "Transform your home into a sanctuary of comfort and style with our bespoke residential design solutions.",
+    description:
+      "Transform your home into a sanctuary of comfort and style with our bespoke residential design solutions.",
+    href: "/services/residential",
   },
   {
     icon: Building2,
     title: "Commercial Interior Design",
-    description: "Create inspiring workspaces that boost productivity and leave lasting impressions on clients and employees.",
+    description:
+      "Create inspiring workspaces that boost productivity and leave lasting impressions on clients and employees.",
+    href: "/services/commercial",
   },
   {
     icon: ChefHat,
     title: "Modular Kitchen & Wardrobes",
-    description: "Custom-designed modular solutions that maximize space efficiency while maintaining aesthetic appeal.",
+    description:
+      "Custom-designed modular solutions that maximize space efficiency while maintaining aesthetic appeal.",
+    href: "/services/modular",
   },
   {
     icon: Hammer,
     title: "Turnkey Interior Solutions",
-    description: "End-to-end project management from concept to completion, delivering hassle-free transformations.",
+    description:
+      "End-to-end project management from concept to completion, delivering hassle-free transformations.",
+    href: "/services/turnkey",
   },
   {
     icon: Armchair,
     title: "Custom Furniture & Décor",
-    description: "Handcrafted furniture pieces and curated décor elements that add personality to your space.",
+    description:
+      "Handcrafted furniture pieces and curated décor elements that add personality to your space.",
+    href: "/services/custom-furniture",
   },
   {
     icon: Palette,
     title: "Design Consultation",
-    description: "Expert guidance on color schemes, materials, and layouts to help you make informed design decisions.",
+    description:
+      "Expert guidance on color schemes, materials, and layouts to help you make informed design decisions.",
+    href: "/services/consultation",
   },
 ];
 
@@ -96,24 +108,37 @@ export function Services() {
           animate={isInView ? "visible" : "hidden"}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {services.map((service) => (
-            <motion.div
+          {services.map(service => (
+            <a
               key={service.title}
-              variants={cardVariants}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className="group p-8 bg-card border border-border hover:border-bronze/50 transition-all duration-500"
+              href={service.href}
+              className="group block"
             >
               <motion.div
-                className="w-12 h-12 flex items-center justify-center border border-border group-hover:border-bronze group-hover:text-bronze transition-colors duration-300 mb-6"
-                whileHover={{ rotate: 5, scale: 1.05 }}
+                variants={cardVariants}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                className="p-8 bg-card border border-border
+                 hover:border-bronze/50 transition-all duration-500
+                 cursor-pointer h-full"
               >
-                <service.icon size={24} strokeWidth={1.5} />
+                <motion.div
+                  className="w-12 h-12 flex items-center justify-center border border-border
+                   group-hover:border-bronze group-hover:text-bronze
+                   transition-colors duration-300 mb-6"
+                  whileHover={{ rotate: 5, scale: 1.05 }}
+                >
+                  <service.icon size={24} strokeWidth={1.5} />
+                </motion.div>
+
+                <h3 className="font-heading text-xl font-medium mb-3">
+                  {service.title}
+                </h3>
+
+                <p className="text-muted-foreground font-body text-sm leading-relaxed">
+                  {service.description}
+                </p>
               </motion.div>
-              <h3 className="font-heading text-xl font-medium mb-3">{service.title}</h3>
-              <p className="text-muted-foreground font-body text-sm leading-relaxed">
-                {service.description}
-              </p>
-            </motion.div>
+            </a>
           ))}
         </motion.div>
       </div>
