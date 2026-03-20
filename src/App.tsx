@@ -9,25 +9,31 @@ import { ChatBot } from "./components/common/chatBot";
 import ServicePage from "./pages/ServicePage";
 import MainLayout from "./components/layout/MainLayout";
 
+import { LeadProvider } from "./context/LeadContext";
+import { LeadModal } from "./components/common/LeadModal";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Index />} />
-            <Route path="/services/:type" element={<ServicePage />} />
-          </Route>
+    <LeadProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Index />} />
+              <Route path="/services/:type" element={<ServicePage />} />
+            </Route>
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-      <ChatBot/>
-    </TooltipProvider>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+        <ChatBot />
+        <LeadModal />
+      </TooltipProvider>
+    </LeadProvider>
   </QueryClientProvider>
 );
 

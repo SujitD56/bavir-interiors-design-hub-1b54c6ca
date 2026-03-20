@@ -8,6 +8,7 @@ import projectOffice from "@/assets/project-office.jpg";
 import projectDining from "@/assets/project-dining.jpg";
 import brandVideo from "@/assets/videos/brand-video.mp4";
 import { VideoDialog } from "../common/VideoDialog";
+import { useLeadModal } from "@/context/LeadContext";
 
 const heroImages = [
   projectBedroom,
@@ -16,6 +17,7 @@ const heroImages = [
   projectDining,
 ];
 export function Hero() {
+  const { openLeadModal } = useLeadModal();
   const [currentImage, setCurrentImage] = useState(0);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
@@ -116,11 +118,13 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <a href="#contact">
-            <Button variant="luxury" size="xl">
-              Start Project
-            </Button>
-          </a>
+          <Button 
+            variant="luxury" 
+            size="xl"
+            onClick={() => openLeadModal('Hero')}
+          >
+            Start Project
+          </Button>
           <VideoDialog />
         </motion.div>
       </div>

@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import { ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react";
+import { useLeadTracking } from "@/hooks/useLeadTracking";
 
 export function Contact() {
   const { toast } = useToast();
+  const { logLead } = useLeadTracking();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [formData, setFormData] = useState({
@@ -19,6 +21,13 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Log the lead data to Google Sheets
+    logLead({
+      ...formData,
+      source: "Contact Form",
+    });
+
     toast({
       title: "Message Sent!",
       description: "Thank you for reaching out. We'll get back to you within 24 hours.",
@@ -39,12 +48,12 @@ export function Contact() {
     {
       icon: Phone,
       title: "Call Us",
-      lines: ["+91 8296372402", "+91 7975229303"],
+      lines: ["+91 7676457919"],
     },
     {
       icon: Mail,
       title: "Email Us",
-      lines: ["hello@bavirinteriors.com", "projects@bavirinteriors.com"],
+      lines: ["bavirinteriors@gmail.com"],
     },
     {
       icon: Clock,
@@ -246,19 +255,54 @@ export function Contact() {
               >
                 <p className="text-sm text-background/60 font-body mb-4">Follow Us</p>
                 <div className="flex gap-4">
-                  {["Instagram", "Facebook", "Pinterest", "LinkedIn"].map((social, index) => (
-                    <motion.a
-                      key={social}
-                      href="#"
-                      className="text-sm text-background/70 hover:text-bronze transition-colors font-body"
-                      whileHover={{ y: -3 }}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ delay: 0.9 + index * 0.05 }}
-                    >
-                      {social}
-                    </motion.a>
-                  ))}
+                  <motion.a
+                    href="https://www.instagram.com/bavirinteriors?igsh=MW50dWpwNWRqaTBmdQ%3D%3D&utm_source=qr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-background/70 hover:text-bronze transition-colors font-body"
+                    whileHover={{ y: -3 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.9 }}
+                  >
+                    Instagram
+                  </motion.a>
+                  <motion.a
+                    href="https://www.facebook.com/share/1GzeAB3Ddy/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-background/70 hover:text-bronze transition-colors font-body"
+                    whileHover={{ y: -3 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.95 }}
+                  >
+                    Facebook
+                  </motion.a>
+                  <motion.a
+                    href="https://pin.it/1zWQG9QnV"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-background/70 hover:text-bronze transition-colors font-body"
+                    whileHover={{ y: -3 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 1.0 }}
+                  >
+                    Pinterest
+                  </motion.a>
+                  <motion.a
+                    href="https://www.linkedin.com/in/bavir-interiors-8631613b8/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-background/70 hover:text-bronze transition-colors font-body"
+                    whileHover={{ y: -3 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 1.05 }}
+                  >
+                    LinkedIn
+                  </motion.a>
                 </div>
               </motion.div>
             </div>

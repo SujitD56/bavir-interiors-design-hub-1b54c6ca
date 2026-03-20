@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { serviceProjects, serviceContent, serviceProcess  } from "../data/service";
+import { useLeadModal } from "@/context/LeadContext";
 
 type ServiceType = keyof typeof serviceProjects;
 
@@ -30,6 +31,7 @@ type Project = {
 
 export default function ServicePage() {
   const { type } = useParams<{ type: ServiceType }>();
+  const { openLeadModal } = useLeadModal();
   const containerRef = useRef<HTMLDivElement>(null);
 
   const projects = type ? serviceProjects[type] : null;
@@ -385,11 +387,12 @@ export default function ServicePage() {
               <p className="text-background/80 text-lg">{content.costInfo}</p>
             )}
             <div className="flex justify-center">
-              <a href="#contact">
-                <button className="bg-bronze text-white px-8 py-4 rounded-full font-heading text-lg hover:bg-bronze/90 transition-all flex items-center gap-2">
-                  Book a Free Consultation Today
-                </button>
-              </a>
+              <button 
+                onClick={() => openLeadModal(`Service Page - ${content.title}`)}
+                className="bg-bronze text-white px-8 py-4 rounded-full font-heading text-lg hover:bg-bronze/90 transition-all flex items-center gap-2"
+              >
+                Book a Free Consultation Today
+              </button>
             </div>
           </motion.div>
         )}

@@ -16,10 +16,12 @@ const footerLinks = {
     { label: "Bathroom Design", href: "/services/bathroom" },
   ],
   connect: [
-    { label: "Instagram", href: "#" },
-    { label: "Facebook", href: "#" },
-    { label: "Pinterest", href: "#" },
-    { label: "LinkedIn", href: "#" },
+    { label: "Instagram", href: "https://www.instagram.com/bavirinteriors?igsh=MW50dWpwNWRqaTBmdQ%3D%3D&utm_source=qr" },
+    { label: "Facebook", href: "https://www.facebook.com/share/1GzeAB3Ddy/?mibextid=wwXIfr" },
+    { label: "Pinterest", href: "https://pin.it/1zWQG9QnV" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/bavir-interiors-8631613b8/" },
+    { label: "WhatsApp", href: "https://wa.me/917676457919" },
+    { label: "Email", href: "mailto:bavirinteriors@gmail.com" },
   ],
 };
 
@@ -106,6 +108,8 @@ export function Footer() {
                 >
                   <a
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-background/70 hover:text-bronze transition-colors font-body text-sm"
                   >
                     {link.label}

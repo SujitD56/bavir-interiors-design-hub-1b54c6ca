@@ -14,8 +14,8 @@ const Index = () => {
     <main className="overflow-x-hidden">
       <Navbar />
       <Hero />
-      <About />
       <Services />
+      <About />
       <Portfolio />
       <Process />
       <BHKDesigns />

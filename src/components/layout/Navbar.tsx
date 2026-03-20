@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import bavirLogo from "@/assets/bavir-logo.png";
 import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLeadModal } from "@/context/LeadContext";
 
 const navLinks = [
   { label: "Home", href: "/#home" },
@@ -24,6 +25,7 @@ const serviceMenu = [
 ];
 
 export function Navbar() {
+  const { openLeadModal } = useLeadModal();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -34,6 +36,31 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#")) {
+      e.preventDefault();
+      const id = href.substring(2);
+      const element = document.getElementById(id);
+      if (element) {
+        setIsOpen(false);
+        const offset = 80; // Offset for fixed header
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+        
+        // Update URL hash without reload
+        window.history.pushState(null, "", href);
+      } else {
+        // Fallback if element not found (e.g. on another page)
+        window.location.href = href;
+      }
+    }
+  };
 
   return (
     <motion.nav
@@ -114,6 +141,7 @@ export function Navbar() {
                 <motion.a
                   key={link.label}
                   href={link.href}
+                  onClick={(e) => scrollToSection(e, link.href)}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index, duration: 0.5 }}
@@ -132,18 +160,23 @@ export function Navbar() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
             >
-              <a href="#contact">
-              <Button variant="luxury" size="lg">
+              <Button 
+                variant="luxury" 
+                size="lg"
+                onClick={() => openLeadModal('Navbar')}
+              >
                 Start Project
               </Button>
-              </a>
             </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2"
+            className={`lg:hidden p-2 rounded-md transition-colors duration-300
+              ${isOpen || isScrolled ? "text-black" : "text-white"}
+              ${isOpen ? "bg-secondary" : ""}
+            `}
             aria-label="Toggle menu"
             whileTap={{ scale: 0.9 }}
           >
@@ -159,27 +192,59 @@ export function Navbar() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden mt-6"
+              className="lg:hidden overflow-hidden mt-2 bg-white rounded-2xl shadow-2xl border border-border/50 px-6"
             >
-              <div className="flex flex-col gap-4 pb-6">
-                {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 * index }}
-                    className="text-lg font-body text-foreground/80 hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-                <a href="#contact" onClick={() => setIsOpen(false)}>
-                <Button variant="luxury" size="lg" className="mt-4" >
+              <div className="flex flex-col gap-5 py-8">
+                {navLinks.map((link, index) => {
+                  if (link.label === "Services") {
+                    return (
+                      <div key={link.label} className="flex flex-col gap-3">
+                        <span className="text-lg font-heading font-medium text-bronze uppercase tracking-widest text-[10px] mb-1">
+                          Our Services
+                        </span>
+                        <div className="grid grid-cols-1 gap-3 pl-4 border-l border-bronze/20">
+                          {serviceMenu.map((service) => (
+                            <Link
+                              key={service.label}
+                              to={service.href}
+                              onClick={() => setIsOpen(false)}
+                              className="text-base font-body text-foreground/70 hover:text-bronze transition-colors flex items-center justify-between"
+                            >
+                              {service.label}
+                              <span className="text-xs opacity-50">→</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <motion.a
+                      key={link.label}
+                      href={link.href}
+                      onClick={(e) => {
+                        scrollToSection(e, link.href);
+                        // The scrollToSection already sets isOpen to false
+                      }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.05 * index }}
+                      className="text-lg font-heading font-medium text-foreground/80 hover:text-bronze transition-colors flex items-center justify-between group"
+                    >
+                      {link.label}
+                      <span className="text-bronze opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </motion.a>
+                  );
+                })}
+                <div className="h-px bg-border/50 my-2" />
+                <Button 
+                  variant="luxury" 
+                  size="lg" 
+                  className="w-full"
+                  onClick={() => openLeadModal('Navbar Mobile')}
+                >
                   Start Project
                 </Button>
-                </a>
               </div>
             </motion.div>
           )}
