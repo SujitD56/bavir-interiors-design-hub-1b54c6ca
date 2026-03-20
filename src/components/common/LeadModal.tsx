@@ -176,10 +176,12 @@ export function LeadModal() {
                       className="w-full pl-12 pr-4 py-3 bg-secondary/50 border border-transparent focus:border-bronze rounded-xl focus:outline-none transition-all font-body text-sm appearance-none"
                     >
                       <option value="">Select Project Type</option>
-                      <option value="Residential">Residential</option>
-                      <option value="Commercial">Commercial</option>
+                      <option value="Home Interiors">Home Interiors (1BHK/2BHK/3BHK)</option>
                       <option value="Modular Kitchen">Modular Kitchen</option>
-                      <option value="Turnkey">Turnkey Solution</option>
+                      <option value="Bedroom Design">Bedroom Design</option>
+                      <option value="Living Room">Living Room Design</option>
+                      <option value="Bathroom Design">Bathroom Design</option>
+                      <option value="Other">Other Specialized Design</option>
                     </select>
                   </div>
 

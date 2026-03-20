@@ -27,8 +27,10 @@ export const ChatBot = () => {
       let botText = ""
       if (option.includes("Consultation")) {
         botText = "Great choice! Our designers are ready to help. Click the button below to book your free session."
-      } else if (option.includes("Residential")) {
-        botText = "We specialize in luxury residential designs, from 2BHKs to Villas. Would you like to see our portfolio or talk to an expert?"
+      } else if (option.includes("Home Interiors")) {
+        botText = "We specialize in end-to-end home interiors, from 1BHKs to luxury villas. Would you like to see our portfolio or talk to an expert?"
+      } else if (option.includes("Kitchen")) {
+        botText = "Our modular kitchens are designed for efficiency and style. We offer various layouts like L-shape, Island, and Parallel designs. Would you like more details?"
       } else {
         botText = "I'd be happy to help with that! Let's connect you with our design team for more details."
       }
@@ -101,8 +103,8 @@ export const ChatBot = () => {
               {showOptions && (
                 <div className="space-y-2 ml-9">
                   {[
-                    "🏠 Residential Interiors",
-                    "🏢 Commercial Spaces",
+                    "🏠 Full Home Interiors",
+                    "🍳 Modular Kitchen",
                     "✨ Book a Consultation"
                   ].map((opt) => (
                     <button

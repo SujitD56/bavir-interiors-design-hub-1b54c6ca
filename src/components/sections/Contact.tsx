@@ -174,11 +174,12 @@ export function Contact() {
                  font-body appearance-none"
                     >
                       <option value="">Select project type</option>
-                      <option value="residential">Residential</option>
-                      <option value="commercial">Commercial</option>
-                      <option value="modular">Modular Kitchen/Wardrobe</option>
-                      <option value="turnkey">Turnkey Solution</option>
-                      <option value="consultation">Design Consultation</option>
+                      <option value="home-interiors">Home Interiors (1BHK/2BHK/3BHK)</option>
+                      <option value="modular-kitchen">Modular Kitchen</option>
+                      <option value="bedroom-design">Bedroom Design</option>
+                      <option value="living-room">Living Room Design</option>
+                      <option value="bathroom-design">Bathroom Design</option>
+                      <option value="other">Other Specialized Design</option>
                     </select>
 
                     {/* Down arrow icon */}

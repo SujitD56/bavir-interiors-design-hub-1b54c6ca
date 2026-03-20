@@ -6,19 +6,19 @@ const testimonials = [
   {
     id: 1,
     name: "Priya Sharma",
-    project: "Residential - Mumbai",
+    project: "Home Interiors - Mumbai",
     quote: "Bavir Interiors transformed our apartment into a stunning home that perfectly reflects our style. Their attention to detail and professionalism exceeded our expectations.",
   },
   {
     id: 2,
     name: "Rahul Mehta",
-    project: "Commercial - Bangalore",
+    project: "Modern Office - Bangalore",
     quote: "Working with Bavir was an absolute pleasure. They understood our brand vision and created an office space that inspires creativity and productivity.",
   },
   {
     id: 3,
     name: "Anjali Kapoor",
-    project: "Residential - Delhi",
+    project: "Premium Apartment - Delhi",
     quote: "From the initial consultation to the final handover, the team was exceptional. Our home now feels like a luxury retreat. Highly recommended!",
   },
 ];

@@ -16,12 +16,20 @@ const navLinks = [
   { label: "Contact", href: "/#contact" },
 ];
 const serviceMenu = [
-  { label: "Residential", href: "/services/residential" },
-  { label: "Commercial", href: "/services/commercial" },
   { label: "Modular Kitchen", href: "/services/modular" },
-  { label: "Custom Wardrobes", href: "/services/wardrobe" },
+  { label: "Master Bedroom", href: "/services/master-bedroom" },
+  { label: "Living Room", href: "/services/living-room" },
   { label: "Bathroom Design", href: "/services/bathroom" },
-  { label: "Turnkey Solution", href: "/services/turnkey" },
+  { label: "Custom Wardrobes", href: "/services/wardrobe" },
+  { label: "Pooja Room", href: "/services/pooja-room" },
+  { label: "Modular TV Unit", href: "/services/tv-unit" },
+  { label: "Dining Room", href: "/services/dining-room" },
+  { label: "Home Interiors", href: "/services/home-interiors" },
+  { label: "Study Room", href: "/services/study-room" },
+  { label: "Kids Bedroom", href: "/services/kids-bedroom" },
+  { label: "False Ceiling", href: "/services/false-ceiling" },
+  { label: "Space-Saving", href: "/services/space-saving" },
+  { label: "Guest Bedroom", href: "/services/guest-bedroom" },
 ];
 
 export function Navbar() {
@@ -89,17 +97,18 @@ export function Navbar() {
                       />
                     </span>
                     <div
-                      className="absolute left-0 top-full mt-4 w-52 rounded-md bg-white shadow-xl
+                      className="absolute left-1/2 -translate-x-1/2 top-full mt-4 w-[480px] rounded-2xl bg-white shadow-2xl
                      opacity-0 invisible group-hover:opacity-100 group-hover:visible
-                     transition-all duration-200 z-50"
+                     transition-all duration-300 z-50 p-6 border border-border/50"
                     >
-                      <div className="flex flex-col px-4 py-3">
+                      <div className="grid grid-cols-2 gap-x-8 gap-y-2">
                         {serviceMenu.map(service => (
                           <Link
                             key={service.label}
                             to={service.href}
-                            className="py-2 text-sm text-gray-700 hover:text-black transition-colors"
+                            className="py-2 text-[13px] text-gray-600 hover:text-bronze transition-colors flex items-center gap-3 group/item font-body"
                           >
+                            <span className="w-1.5 h-1.5 rounded-full bg-bronze/20 group-hover/item:bg-bronze transition-colors" />
                             {service.label}
                           </Link>
                         ))}

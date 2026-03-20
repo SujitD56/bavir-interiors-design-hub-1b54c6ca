@@ -10,11 +10,14 @@ const footerLinks = {
     { label: "Portfolio", href: "/#portfolio" },
   ],
   services: [
-    { label: "Residential Interiors", href: "/services/residential" },
-    { label: "Commercial Spaces", href: "/services/commercial" },
-    { label: "Modular Kitchens", href: "/services/modular" },
-    { label: "Custom Wardrobes", href: "/services/wardrobe" },
+    { label: "Modular Kitchen", href: "/services/modular" },
+    { label: "Master Bedroom", href: "/services/master-bedroom" },
+    { label: "Living Room", href: "/services/living-room" },
     { label: "Bathroom Design", href: "/services/bathroom" },
+    { label: "Custom Wardrobes", href: "/services/wardrobe" },
+    { label: "Home Interiors", href: "/services/home-interiors" },
+    { label: "False Ceiling", href: "/services/false-ceiling" },
+    { label: "Space-Saving", href: "/services/space-saving" },
   ],
   connect: [
     { label: "Instagram", href: "https://www.instagram.com/bavirinteriors?igsh=MW50dWpwNWRqaTBmdQ%3D%3D&utm_source=qr" },

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef } from "react";
-import { CheckCircle2, Home, Layout, Sparkles, Clock, ShieldCheck, IndianRupee, Calculator } from "lucide-react";
+import { CheckCircle2, Home, Layout, Sparkles, Clock, ShieldCheck, IndianRupee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import projectBedroom from "@/assets/project-bedroom.jpg";
@@ -229,7 +229,7 @@ export function BHKDesigns() {
               Start Your Home Interior Journey Today
             </h3>
             <p className="text-lg text-muted-foreground">
-              Looking to design or renovate your 1BHK, 2BHK, or 3BHK home? Get a free design consultation and personalised cost estimate today.
+              Looking to design or renovate your 1BHK, 2BHK, or 3BHK home? Get a free consultation today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
@@ -239,14 +239,6 @@ export function BHKDesigns() {
                 onClick={() => openLeadModal('BHK Section - Consultation')}
               >
                 <Clock className="mr-2 h-4 w-4" /> Book Free Consultation
-              </Button>
-              <Button 
-                variant="luxury-outline" 
-                size="xl" 
-                className="w-full sm:w-auto bg-white hover:bg-white/90"
-                onClick={() => openLeadModal('BHK Section - Estimate')}
-              >
-                <Calculator className="mr-2 h-4 w-4" /> Get Instant Estimate
               </Button>
             </div>
           </div>
