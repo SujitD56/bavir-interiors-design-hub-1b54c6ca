@@ -44,7 +44,7 @@ export const ChatBot = () => {
       <AnimatePresence>
         {!open && (
           <motion.a
-            href="https://wa.me/917676457919"
+            href="https://wa.me/917676457919?text=Hello%20Bavir%20Interiors!%20I'm%20interested%20in%20your%20design%20services%20and%20looking%20for%20a%20consultation."
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 10, scale: 0.8 }}

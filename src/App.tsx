@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ChatBot } from "./components/common/chatBot";
@@ -11,6 +11,7 @@ import MainLayout from "./components/layout/MainLayout";
 
 import { LeadProvider } from "./context/LeadContext";
 import { LeadModal } from "./components/common/LeadModal";
+import { ScrollToHash } from "./components/common/ScrollToHash";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,8 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <HashRouter>
+          <ScrollToHash />
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Index />} />
@@ -29,7 +31,7 @@ const App = () => (
 
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
         <ChatBot />
         <LeadModal />
       </TooltipProvider>

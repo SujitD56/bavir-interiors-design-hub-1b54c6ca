@@ -37,31 +37,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("/#")) {
-      e.preventDefault();
-      const id = href.substring(2);
-      const element = document.getElementById(id);
-      if (element) {
-        setIsOpen(false);
-        const offset = 80; // Offset for fixed header
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-        
-        // Update URL hash without reload
-        window.history.pushState(null, "", href);
-      } else {
-        // Fallback if element not found (e.g. on another page)
-        window.location.href = href;
-      }
-    }
-  };
-
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
@@ -100,7 +75,6 @@ export function Navbar() {
               if (link.label === "Services") {
                 return (
                   <div key={link.label} className="relative group">
-                    {/* Services label */}
                     <span
                       className={`flex items-center gap-1 cursor-pointer text-sm font-body tracking-wide transition-colors duration-300 relative
                       ${isScrolled ? "text-black" : "text-white"}
@@ -114,7 +88,6 @@ export function Navbar() {
                         className="mt-[1px] transition-transform duration-300 group-hover:rotate-180"
                       />
                     </span>
-                    {/* Dropdown */}
                     <div
                       className="absolute left-0 top-full mt-4 w-52 rounded-md bg-white shadow-xl
                      opacity-0 invisible group-hover:opacity-100 group-hover:visible
@@ -136,15 +109,10 @@ export function Navbar() {
                 );
               }
 
-              // 🔁 All other links stay EXACTLY the same
               return (
-                <motion.a
+                <Link
                   key={link.label}
-                  href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index, duration: 0.5 }}
+                  to={link.href}
                   className={`text-sm font-body tracking-wide transition-colors duration-300 relative
                   ${isScrolled ? "text-black hover:text-black" : "text-white hover:text-white"}
                   after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px
@@ -152,7 +120,7 @@ export function Navbar() {
                 `}
                 >
                   {link.label}
-                </motion.a>
+                </Link>
               );
             })}
             <motion.div
@@ -219,21 +187,15 @@ export function Navbar() {
                     );
                   }
                   return (
-                    <motion.a
+                    <Link
                       key={link.label}
-                      href={link.href}
-                      onClick={(e) => {
-                        scrollToSection(e, link.href);
-                        // The scrollToSection already sets isOpen to false
-                      }}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.05 * index }}
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
                       className="text-lg font-heading font-medium text-foreground/80 hover:text-bronze transition-colors flex items-center justify-between group"
                     >
                       {link.label}
                       <span className="text-bronze opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                    </motion.a>
+                    </Link>
                   );
                 })}
                 <div className="h-px bg-border/50 my-2" />

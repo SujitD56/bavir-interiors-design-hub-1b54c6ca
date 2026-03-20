@@ -48,7 +48,18 @@ export function Contact() {
     {
       icon: Phone,
       title: "Call Us",
-      lines: ["+91 7676457919"],
+      lines: [
+        "+91 7676457919",
+        <a 
+          key="wa-link"
+          href="https://wa.me/917676457919?text=Hello%20Bavir%20Interiors!%20I'm%20interested%20in%20your%20design%20services%20and%20looking%20for%20a%20consultation." 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-bronze hover:underline block mt-1"
+        >
+          Chat on WhatsApp
+        </a>
+      ],
     },
     {
       icon: Mail,

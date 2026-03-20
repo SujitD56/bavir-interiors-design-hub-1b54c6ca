@@ -1,12 +1,13 @@
 import { ArrowUp } from "lucide-react";
 import { motion } from "framer-motion";
 import bavirLogo from "@/assets/bavir-logo.png";
+import { Link } from "react-router-dom";
 
 const footerLinks = {
   company: [
-    { label: "About Us", href: "#about" },
-    { label: "Our Services", href: "#services" },
-    { label: "Portfolio", href: "#portfolio" },
+    { label: "About Us", href: "/#about" },
+    { label: "Our Services", href: "/#services" },
+    { label: "Portfolio", href: "/#portfolio" },
   ],
   services: [
     { label: "Residential Interiors", href: "/services/residential" },
@@ -20,7 +21,7 @@ const footerLinks = {
     { label: "Facebook", href: "https://www.facebook.com/share/1GzeAB3Ddy/?mibextid=wwXIfr" },
     { label: "Pinterest", href: "https://pin.it/1zWQG9QnV" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/bavir-interiors-8631613b8/" },
-    { label: "WhatsApp", href: "https://wa.me/917676457919" },
+    { label: "WhatsApp", href: "https://wa.me/917676457919?text=Hello%20Bavir%20Interiors!%20I'm%20interested%20in%20your%20design%20services%20and%20looking%20for%20a%20consultation." },
     { label: "Email", href: "mailto:bavirinteriors@gmail.com" },
   ],
 };
@@ -60,12 +61,12 @@ export function Footer() {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-background/70 hover:text-bronze transition-colors font-body text-sm"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>
@@ -83,12 +84,12 @@ export function Footer() {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-background/70 hover:text-bronze transition-colors font-body text-sm"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>
