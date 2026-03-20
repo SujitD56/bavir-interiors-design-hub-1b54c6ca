@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useLeadModal } from '@/context/LeadContext';
 import { useLeadTracking } from '@/hooks/useLeadTracking';
 import { useToast } from '@/hooks/use-toast';
+import bavirLogo from "@/assets/bavir-logo.png";
 
 export function LeadModal() {
   const { isModalOpen, closeLeadModal, modalSource } = useLeadModal();
@@ -103,9 +104,17 @@ export function LeadModal() {
             ) : (
               <div className="p-8 md:p-12">
                 <div className="mb-8">
-                  <span className="text-bronze text-[10px] uppercase tracking-[0.3em] font-medium mb-2 block">
-                    Luxury Interiors
-                  </span>
+                  <div className="flex items-center gap-3 mb-4">
+                    <img 
+                      src={bavirLogo} 
+                      alt="Bavir Interiors Logo" 
+                      className="h-10 w-auto"
+                    />
+                    <div className="h-8 w-px bg-bronze/20" />
+                    <span className="text-bronze text-[10px] uppercase tracking-[0.3em] font-medium block">
+                      Bavir Interiors
+                    </span>
+                  </div>
                   <h3 className="text-3xl font-heading font-semibold text-foreground">
                     Start Your Project
                   </h3>

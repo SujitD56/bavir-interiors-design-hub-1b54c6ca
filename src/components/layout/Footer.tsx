@@ -44,7 +44,7 @@ export function Footer() {
               whileHover={{ scale: 1.05 }}
             />
             <p className="text-background/70 font-body text-sm leading-relaxed mb-6">
-              Transforming spaces into timeless interiors since 2010. 
+              Transforming spaces into timeless interiors since 2021. 
               Experience the art of luxury living with our bespoke design solutions.
             </p>
           </div>
