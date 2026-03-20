@@ -3,6 +3,13 @@ import projectKitchen from "@/assets/project-kitchen.jpg";
 import projectOffice from "@/assets/project-office.jpg";
 import projectDining from "@/assets/project-dining.jpg";
 import heroImage from "@/assets/hero-living-room.jpg";
+import projectBathroom from "@/assets/project-bathroom.png";
+import luxuryLiving from "@/assets/luxury-living.png";
+import luxuryOffice from "@/assets/luxury-office.png";
+import luxuryWardrobe from "@/assets/luxury-wardrobe.png";
+import kitchenDetail from "@/assets/kitchen-detail.png";
+import officeLounge from "@/assets/office-lounge.png";
+import luxuryDining from "@/assets/luxury-dining.png";
 
 /* =========================
    PROJECTS (Images Grid)
@@ -11,38 +18,27 @@ export const serviceProjects = {
   residential: [
     {
       id: 1,
-      title: "Modern Living Space",
+      title: "Luxury Residential Suite",
       location: "Indiranagar, Bengaluru",
-      image: heroImage,
+      image: luxuryLiving,
       gallery: [
+        luxuryLiving,
+        luxuryDining,
         heroImage,
         projectBedroom,
-        projectDining,
         projectKitchen,
       ],
     },
     {
       id: 2,
-      title: "Serene Master Bedroom",
-      location: "Whitefield, Bengaluru",
-      image: projectBedroom,
-       gallery: [
-        heroImage,
-        projectBedroom,
-        projectDining,
-        projectKitchen,
-      ],
-    },
-    {
-      id: 3,
-      title: "Contemporary Kitchen",
+      title: "Modern Dining Experience",
       location: "Jayanagar, Bengaluru",
-      image: projectKitchen,
-       gallery: [
+      image: luxuryDining,
+      gallery: [
+        luxuryDining,
+        luxuryLiving,
         heroImage,
-        projectBedroom,
         projectDining,
-        projectKitchen,
       ],
     },
   ],
@@ -50,26 +46,25 @@ export const serviceProjects = {
   commercial: [
     {
       id: 4,
-      title: "Executive Office",
+      title: "Corporate Excellence Center",
       location: "MG Road, Bengaluru",
-      image: projectOffice,
-       gallery: [
+      image: luxuryOffice,
+      gallery: [
+        luxuryOffice,
+        officeLounge,
+        projectOffice,
         heroImage,
-        projectBedroom,
-        projectDining,
-        projectKitchen,
       ],
     },
     {
       id: 5,
-      title: "Corporate Workspace",
+      title: "Executive Lounge Area",
       location: "Electronic City, Bengaluru",
-      image: projectOffice,
-       gallery: [
-        heroImage,
-        projectBedroom,
-        projectDining,
-        projectKitchen,
+      image: officeLounge,
+      gallery: [
+        officeLounge,
+        luxuryOffice,
+        projectOffice,
       ],
     },
   ],
@@ -77,14 +72,25 @@ export const serviceProjects = {
   modular: [
     {
       id: 6,
-      title: "Elegant Modular Kitchen",
+      title: "Premium Modular Kitchen",
       location: "Sarjapur Road, Bengaluru",
-      image: projectDining,
-       gallery: [
-        heroImage,
-        projectBedroom,
-        projectDining,
+      image: projectKitchen,
+      gallery: [
         projectKitchen,
+        kitchenDetail,
+        projectDining,
+        heroImage,
+      ],
+    },
+    {
+      id: 61,
+      title: "Minimalist Kitchen Detail",
+      location: "Whitefield, Bengaluru",
+      image: kitchenDetail,
+      gallery: [
+        kitchenDetail,
+        projectKitchen,
+        projectDining,
       ],
     },
   ],
@@ -95,26 +101,39 @@ export const serviceProjects = {
       title: "Luxury Turnkey Villa",
       location: "Hebbal, Bengaluru",
       image: heroImage,
-       gallery: [
+      gallery: [
         heroImage,
-        projectBedroom,
-        projectDining,
+        luxuryLiving,
+        luxuryOffice,
         projectKitchen,
       ],
     },
   ],
 
-  consultation: [
+  bathroom: [
     {
-      id: 8,
-      title: "Design Consultation Session",
-      location: "Across Bengaluru",
-      image: heroImage,
-       gallery: [
-        heroImage,
-        projectBedroom,
+      id: 9,
+      title: "Spa-inspired Master Bath",
+      location: "Koramangala, Bengaluru",
+      image: projectBathroom,
+      gallery: [
+        projectBathroom,
         projectDining,
-        projectKitchen,
+        heroImage,
+      ],
+    },
+  ],
+
+  wardrobe: [
+    {
+      id: 10,
+      title: "Bespoke Walk-in Closet",
+      location: "HSR Layout, Bengaluru",
+      image: luxuryWardrobe,
+      gallery: [
+        luxuryWardrobe,
+        projectBedroom,
+        heroImage,
       ],
     },
   ],
@@ -124,8 +143,90 @@ export const serviceProjects = {
    SERVICE CONTENT (Text)
 ========================= */
 export const serviceContent = {
+  // ... (residential, commercial, modular kept as is)
+  // I'll just append wardrobe and bathroom here
+  wardrobe: {
+    title: "Custom Wardrobes & Storage Solutions",
+    mainImage: luxuryWardrobe,
+    subtitle: "Elegantly designed for maximum space & style",
+    description: "At Bavir Interiors, we design wardrobes that are more than just storage—they are a seamless part of your bedroom's aesthetic. Our solutions focus on intelligent space management, premium finishes, and hardware that lasts a lifetime.",
+    whatIsTitle: "Why Choose a Custom Wardrobe?",
+    whatIsDescription: "A custom wardrobe is tailored to your specific storage needs and room dimensions. From walk-in closets to wall-to-wall sliding units, we ensure every inch is utilised effectively with specialized compartments for all your essentials.",
+    layouts: [
+      { name: "Sliding Door Wardrobes", description: "Space-saving and modern" },
+      { name: "Hinged Door Wardrobes", description: "Classic and versatile" },
+      { name: "Walk-in Closets", description: "The ultimate luxury storage" },
+      { name: "L-Shaped Wardrobes", description: "Perfect for corner spaces" },
+      { name: "Floor-to-Ceiling Units", description: "Maximum vertical storage" },
+    ],
+    trends: [
+      "Integrated LED profile lighting",
+      "Tinted glass and lacquered glass doors",
+      "Minimalist handle-less designs",
+      "Customised internal organisers",
+      "Premium leather and fabric finishes",
+    ],
+    services: [
+      "Walk-in Closet Design",
+      "Sliding & Hinged Wardrobes",
+      "Loft Storage Solutions",
+      "TV & Entertainment Units",
+      "Study & Home Office Desks",
+      "Shoe Racks & Foyer Storage",
+    ],
+    highlights: [
+      "Personalised internal layouts",
+      "Premium soft-close hardware",
+      "Durable moisture-resistant materials",
+      "Expert installation",
+    ],
+    costInfo: "Our wardrobes are priced based on linear footage, material choice, and internal accessories.",
+    footerText: "Organize your life with style. Let us design the perfect storage solution for your home today."
+  },
+
+  bathroom: {
+    title: "Bathroom Interior Design Ideas",
+    mainImage: projectBathroom,
+    subtitle: "Turn Your Bathroom into a Stylish Private Retreat",
+    description: "Your bathroom is more than just a functional space—it’s where your day starts fresh and ends in calm. At Bavir Interiors, we design bathrooms that combine comfort, aesthetics, and intelligent planning, no matter the size of your home.",
+    whatIsTitle: "How to Design the Perfect Modern Bathroom?",
+    whatIsDescription: "A well-designed bathroom balances beauty with usability. We focus on clean lines, smart storage, and moisture-resistant finishes that feel luxurious yet survive the test of time and humidity.",
+    layouts: [
+      { name: "Compact Bathrooms", description: "Maximising every inch in urban apartments" },
+      { name: "Master Bath Suites", description: "Spacious layouts with premium zoning" },
+      { name: "Minimal & Scandinavian", description: "Clean, light, and airy designs" },
+      { name: "Contemporary & Classic", description: "Timeless elegance with modern fixtures" },
+      { name: "Wet & Dry Zoning", description: "Practical separation for better hygiene" },
+    ],
+    trends: [
+      "Earthy and neutral colour palettes",
+      "Textured and stone-finish tiles",
+      "Walk-in showers with glass partitions",
+      "Matte black and brushed metal fittings",
+      "Backlit and smart mirrors",
+      "Natural wood accents for a spa-like feel",
+    ],
+    services: [
+      "Space planning & plumbing layout",
+      "Tile and material selection",
+      "Custom vanities and storage",
+      "Lighting and mirror design",
+      "Glass partition installation",
+      "Fixtures & fittings consultation",
+    ],
+    highlights: [
+      "Tailor-made bathroom designs",
+      "High-quality moisture-resistant finishes",
+      "Expert design & plumbing guidance",
+      "Hassle-free execution",
+      "Quality assurance & warranty",
+    ],
+    costInfo: "Bathroom renovation costs vary based on tile selection, sanitary ware, and custom cabinetry.",
+    footerText: "Your dream bathroom starts here. Get a free design consultation and bathroom cost estimate today."
+  },
   residential: {
     title: "Residential & Home Interiors",
+    mainImage: luxuryLiving,
     description:
       "We design homes that reflect comfort, style, and practicality. From concept to execution, our residential interior solutions combine aesthetics with functionality.",
     services: [
@@ -148,6 +249,7 @@ export const serviceContent = {
 
   commercial: {
     title: "Commercial Interior Solutions",
+    mainImage: luxuryOffice,
     description:
       "We create functional, brand-focused commercial interiors that enhance productivity and customer experience.",
     services: [
@@ -168,24 +270,53 @@ export const serviceContent = {
   },
 
   modular: {
-    title: "Modular Kitchens & Storage",
+    title: "Transform Your Kitchen with Bavir Interiors",
+    mainImage: projectKitchen,
+    subtitle: "Smart, Stylish & Fully Customised Kitchens for Modern Homes",
     description:
-      "Stylish, functional modular kitchens and storage units designed for modern living.",
+      "At Bavir Interiors, we design modular kitchens that perfectly blend functionality, aesthetics, and durability. Whether you live in a compact apartment or a spacious villa, our modular kitchen solutions are crafted to suit your lifestyle, space, and budget. From sleek minimal designs to elegant contemporary finishes, our kitchens are thoughtfully planned to make cooking efficient, organised, and enjoyable.",
+    whatIsTitle: "What Is a Modular Kitchen?",
+    whatIsDescription: "A modular kitchen is a modern kitchen setup made of pre-designed cabinet modules that are customised to fit your space. These kitchens offer better space optimisation, easy maintenance, faster installation, and a stylish modern appeal. At Bavir Interiors, every modular kitchen is tailor-made, ensuring maximum utility and long-lasting quality.",
+    layouts: [
+      { name: "L-Shaped", description: "Ideal for small to medium spaces" },
+      { name: "U-Shaped", description: "Perfect for maximum storage and workflow" },
+      { name: "Parallel (Galley)", description: "Efficient and space-saving" },
+      { name: "Island Kitchen", description: "Best for open and spacious homes" },
+      { name: "Open Kitchen", description: "Seamless integration with living or dining areas" },
+    ],
+    trends: [
+      "Matte and soft-touch finishes",
+      "Handle-less cabinets",
+      "Tall pantry and integrated storage units",
+      "Open shelving and glass display cabinets",
+      "Quartz and granite countertops",
+      "Smart corner solutions and accessories",
+    ],
     services: [
-      "Modular Kitchen Design",
-      "Wardrobes & Storage Units",
-      "Soft-close fittings",
-      "Premium hardware",
+      "Space planning & layout design",
+      "Modular kitchens and wardrobes",
+      "Living room, bedroom & dining interiors",
+      "Custom storage solutions",
+      "Lighting, materials & finishes selection",
+      "3D visualisation",
+      "Project management & execution",
+      "Post-installation support",
     ],
     highlights: [
-      "Optimized layouts",
-      "Premium finishes",
-      "Long-lasting durability",
+      "Fully customised kitchen designs",
+      "Premium quality materials and fittings",
+      "Expert designers and skilled execution",
+      "Smart storage solutions for Indian kitchens",
+      "Transparent pricing and budget-friendly",
+      "On-time project delivery",
     ],
+    costInfo: "Our modular kitchens are designed for all budgets, with flexible options based on size, materials, and finishes.",
+    footerText: "Your kitchen deserves more than just good looks—it deserves smart design and flawless execution. Explore our modular kitchen designs and turn your cooking space into a beautiful, efficient hub for everyday living."
   },
 
   turnkey: {
     title: "Turnkey Interior Solutions",
+    mainImage: projectKitchen,
     description:
       "End-to-end interior execution managed entirely by our expert team — from design to final handover.",
     services: [
@@ -202,23 +333,6 @@ export const serviceContent = {
       "Transparent pricing",
       "Quality-controlled execution",
       "Stress-free experience",
-    ],
-  },
-
-  consultation: {
-    title: "Design Consultation",
-    description:
-      "Professional interior design consultation sessions available both online and onsite.",
-    services: [
-      "Requirement analysis",
-      "Space planning",
-      "Design guidance",
-      "Material suggestions",
-    ],
-    highlights: [
-      "Expert guidance",
-      "Clear budgeting",
-      "Design clarity",
     ],
   },
 };

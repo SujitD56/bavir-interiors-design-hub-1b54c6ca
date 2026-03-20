@@ -6,6 +6,8 @@ import projectBedroom from "@/assets/project-bedroom.jpg";
 import projectKitchen from "@/assets/project-kitchen.jpg";
 import projectOffice from "@/assets/project-office.jpg";
 import projectDining from "@/assets/project-dining.jpg";
+import brandVideo from "@/assets/videos/brand-video.mp4";
+import { VideoDialog } from "../common/VideoDialog";
 
 const heroImages = [
   projectBedroom,
@@ -15,6 +17,7 @@ const heroImages = [
 ];
 export function Hero() {
   const [currentImage, setCurrentImage] = useState(0);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,25 +30,39 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Background Image Slider */}
+      {/* Dynamic Background: Video with Image Fallback */}
       <div className="absolute inset-0">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={currentImage}
-            src={heroImages[currentImage]}
-            alt="Luxury interior background"
-            className="absolute inset-0 w-full h-full object-cover"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          />
-        </AnimatePresence>
+        <video
+          src={brandVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onLoadedData={() => setIsVideoLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            isVideoLoaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+        
+        {!isVideoLoaded && (
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentImage}
+              src={heroImages[currentImage]}
+              alt="Luxury interior background"
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+            />
+          </AnimatePresence>
+        )}
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/50 via-foreground/30 to-foreground/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/20 to-foreground/70" />
       </div>
 
       {/* Animated Lines */}
@@ -104,16 +121,7 @@ export function Hero() {
               Start Project
             </Button>
           </a>
-         <a href="/#portfolio">
-          <Button
-            variant="luxury-outline"
-            size="xl"
-            className="border-background/50 text-background hover:bg-background/10 group"
-          >
-            <Play size={18} className="mr-2 group-hover:scale-110 transition-transform" />
-            Watch Our Story
-          </Button>
-          </a>
+          <VideoDialog />
         </motion.div>
       </div>
  

@@ -31,11 +31,10 @@ const reasons = [
 ];
 
 const stats = [
-  { value: "14+", label: "Years of Excellence" },
-  { value: "250+", label: "Happy Clients" },
-  { value: "15", label: "Design Awards" },
-  { value: "50+", label: "Team Members" },
-  { value: "8", label: "Cities Served" },
+  { value: "5+", label: "Years of Excellence" },
+  { value: "150+", label: "Happy Clients" },
+  { value: "95%", label: "Satisfaction Rate" },
+  { value: "5+", label: "Cities Served" },
 ];
 
 export function WhyChooseUs() {
@@ -116,15 +115,14 @@ export function WhyChooseUs() {
                 animate={isInView ? { scale: 1, opacity: 1 } : {}}
                 transition={{ delay: 0.6, duration: 0.5, type: "spring" }}
               >
-                <span className="font-heading text-6xl lg:text-7xl font-light text-bronze">14+</span>
+                <span className="font-heading text-6xl lg:text-7xl font-light text-bronze">5+</span>
                 <p className="text-muted-foreground font-body mt-2">Years of Excellence</p>
               </motion.div>
-              <div className="grid grid-cols-2 gap-8 pt-8 border-t border-border">
+              <div className="grid grid-cols-3 gap-4 lg:gap-8 pt-8 border-t border-border">
                 {[
-                  { value: "250+", label: "Happy Clients" },
-                  { value: "15", label: "Design Awards" },
-                  { value: "50+", label: "Team Members" },
-                  { value: "8", label: "Cities Served" },
+                  { value: "150+", label: "Happy Clients" },
+                  { value: "95%", label: "Satisfaction" },
+                  { value: "5+", label: "Cities" },
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -134,12 +132,12 @@ export function WhyChooseUs() {
                     transition={{ delay: 0.7 + index * 0.1, duration: 0.4 }}
                   >
                     <motion.span
-                      className="font-heading text-3xl font-medium block"
+                      className="font-heading text-2xl lg:text-3xl font-medium block"
                       whileHover={{ scale: 1.1, color: "hsl(var(--bronze))" }}
                     >
                       {stat.value}
                     </motion.span>
-                    <p className="text-sm text-muted-foreground font-body mt-1">{stat.label}</p>
+                    <p className="text-[10px] lg:text-xs text-muted-foreground font-body mt-1 uppercase tracking-wider">{stat.label}</p>
                   </motion.div>
                 ))}
               </div>

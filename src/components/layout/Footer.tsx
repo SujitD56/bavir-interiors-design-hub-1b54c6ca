@@ -7,13 +7,13 @@ const footerLinks = {
     { label: "About Us", href: "#about" },
     { label: "Our Services", href: "#services" },
     { label: "Portfolio", href: "#portfolio" },
-    { label: "Careers", href: "#" },
   ],
   services: [
-    { label: "Residential Design", href: "#services" },
-    { label: "Commercial Design", href: "#services" },
-    { label: "Modular Solutions", href: "#services" },
-    { label: "Consultation", href: "#contact" },
+    { label: "Residential Interiors", href: "/services/residential" },
+    { label: "Commercial Spaces", href: "/services/commercial" },
+    { label: "Modular Kitchens", href: "/services/modular" },
+    { label: "Custom Wardrobes", href: "/services/wardrobe" },
+    { label: "Bathroom Design", href: "/services/bathroom" },
   ],
   connect: [
     { label: "Instagram", href: "#" },

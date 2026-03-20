@@ -1,49 +1,63 @@
-import { Home, Building2, ChefHat, Hammer, Armchair, Palette } from "lucide-react";
+import { Home, Building2, ChefHat, Hammer, Armchair, Palette, Bath, LayoutGrid } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
+
+// Service Images
+import heroImage from "@/assets/hero-living-room.jpg";
+import projectBedroom from "@/assets/project-bedroom.jpg";
+import projectKitchen from "@/assets/project-kitchen.jpg";
+import projectOffice from "@/assets/project-office.jpg";
+import projectBathroom from "@/assets/project-bathroom.png";
 
 const services = [
   {
     icon: Home,
-    title: "Residential Interior Design",
+    title: "Residential",
+    image: heroImage,
     description:
       "Transform your home into a sanctuary of comfort and style with our bespoke residential design solutions.",
     href: "/services/residential",
   },
   {
     icon: Building2,
-    title: "Commercial Interior Design",
+    title: "Commercial",
+    image: projectOffice,
     description:
       "Create inspiring workspaces that boost productivity and leave lasting impressions on clients and employees.",
     href: "/services/commercial",
   },
   {
     icon: ChefHat,
-    title: "Modular Kitchen & Wardrobes",
+    title: "Modular Kitchen",
+    image: projectKitchen,
     description:
-      "Custom-designed modular solutions that maximize space efficiency while maintaining aesthetic appeal.",
+      "Smart, stylish, and fully customised kitchen solutions crafted to suit your lifestyle and space.",
     href: "/services/modular",
   },
   {
+    icon: LayoutGrid,
+    title: "Custom Wardrobes",
+    image: projectBedroom,
+    description:
+      "Elegantly designed storage solutions that maximise your space without compromising on style.",
+    href: "/services/wardrobe",
+  },
+  {
+    icon: Bath,
+    title: "Bathroom Design",
+    image: projectBathroom,
+    description:
+      "Transform your bathroom into a private spa-like retreat with our comfort-focused design ideas.",
+    href: "/services/bathroom",
+  },
+  {
     icon: Hammer,
-    title: "Turnkey Interior Solutions",
+    title: "Turnkey Solution",
+    image: projectKitchen,
     description:
       "End-to-end project management from concept to completion, delivering hassle-free transformations.",
     href: "/services/turnkey",
-  },
-  {
-    icon: Armchair,
-    title: "Custom Furniture & Décor",
-    description:
-      "Handcrafted furniture pieces and curated décor elements that add personality to your space.",
-    href: "/services/custom-furniture",
-  },
-  {
-    icon: Palette,
-    title: "Design Consultation",
-    description:
-      "Expert guidance on color schemes, materials, and layouts to help you make informed design decisions.",
-    href: "/services/consultation",
   },
 ];
 
@@ -109,36 +123,42 @@ export function Services() {
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {services.map(service => (
-            <a
+            <Link
               key={service.title}
-              href={service.href}
+              to={service.href}
               className="group block"
             >
               <motion.div
                 variants={cardVariants}
                 whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                className="p-8 bg-card border border-border
+                className="bg-card border border-border
                  hover:border-bronze/50 transition-all duration-500
-                 cursor-pointer h-full"
+                 cursor-pointer h-full overflow-hidden"
               >
-                <motion.div
-                  className="w-12 h-12 flex items-center justify-center border border-border
-                   group-hover:border-bronze group-hover:text-bronze
-                   transition-colors duration-300 mb-6"
-                  whileHover={{ rotate: 5, scale: 1.05 }}
-                >
-                  <service.icon size={24} strokeWidth={1.5} />
-                </motion.div>
+                {/* Image Preview */}
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+                  <div className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-md border border-border group-hover:bg-bronze group-hover:text-white transition-colors duration-300">
+                    <service.icon size={20} strokeWidth={1.5} />
+                  </div>
+                </div>
 
-                <h3 className="font-heading text-xl font-medium mb-3">
-                  {service.title}
-                </h3>
+                <div className="p-6">
+                  <h3 className="font-heading text-lg font-medium mb-2 group-hover:text-bronze transition-colors">
+                    {service.title}
+                  </h3>
 
-                <p className="text-muted-foreground font-body text-sm leading-relaxed">
-                  {service.description}
-                </p>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed line-clamp-2">
+                    {service.description}
+                  </p>
+                </div>
               </motion.div>
-            </a>
+            </Link>
           ))}
         </motion.div>
       </div>

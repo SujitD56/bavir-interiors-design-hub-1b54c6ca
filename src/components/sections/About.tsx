@@ -4,9 +4,9 @@ import { useRef } from "react";
 import projectBedroom from "@/assets/project-bedroom.jpg";
 
 const stats = [
-  { value: "250+", label: "Projects Completed" },
-  { value: "14+", label: "Years Experience" },
-  { value: "98%", label: "Client Satisfaction" },
+  { value: "150+", label: "Projects Completed" },
+  { value: "5+", label: "Years Experience" },
+  { value: "95%", label: "Client Satisfaction" },
 ];
 
 export function About() {
@@ -58,23 +58,24 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="section-title mb-6"
             >
-              Crafting Exceptional Interiors Since 2010
+              Crafting Exceptional Interiors Since 2021
             </motion.h2>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-4 text-muted-foreground font-body"
+              className="space-y-4 text-muted-foreground font-body leading-relaxed"
             >
               <p>
-                At Bavir Interiors, we believe that every space has a story waiting to be told. 
-                Our passion lies in transforming ordinary rooms into extraordinary experiences 
-                that reflect your personality and lifestyle.
+                Welcome to Bavir Interiors, where your dream space becomes a reality. We understand 
+                that starting a renovation or designing a new home can be overwhelming. That’s why 
+                we’ve built a design hub centered around collaboration, transparency, and creativity.
               </p>
               <p>
-                With over a decade of experience in luxury interior design, our team of skilled 
-                designers and craftsmen work meticulously to bring your vision to life. We combine 
-                timeless aesthetics with modern functionality, ensuring every detail is perfect.
+                Whether you are looking for a modern minimalist kitchen, a cozy traditional living room, 
+                or a complete home transformation, our mission is to deliver designs that are as functional 
+                as they are beautiful. We pride ourselves on our attention to detail and our commitment 
+                to finishing every project on time and within budget. Let’s build something beautiful together.
               </p>
             </motion.div>
 

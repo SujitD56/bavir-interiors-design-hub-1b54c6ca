@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import projectBedroom from "@/assets/project-bedroom.jpg";
 import projectKitchen from "@/assets/project-kitchen.jpg";
 import projectOffice from "@/assets/project-office.jpg";
@@ -13,14 +14,14 @@ const projects = [
     id: 1,
     title: "Modern Living Space",
     category: "Residential",
-    location: "Mumbai, Maharashtra",
+    location: "Bangalore, Karnataka",
     image: heroImage,
   },
   {
     id: 2,
     title: "Serene Master Bedroom",
     category: "Residential",
-    location: "Pune, Maharashtra",
+    location: "Bangalore, Karnataka",
     image: projectBedroom,
   },
   {
@@ -34,21 +35,21 @@ const projects = [
     id: 4,
     title: "Executive Office",
     category: "Commercial",
-    location: "Delhi NCR",
+    location: "Bangalore, Karnataka",
     image: projectOffice,
   },
   {
     id: 5,
     title: "Elegant Dining Room",
     category: "Residential",
-    location: "Chennai, Tamil Nadu",
+    location: "Bangalore, Karnataka",
     image: projectDining,
   },
   {
     id: 6,
     title: "Corporate Workspace",
     category: "Commercial",
-    location: "Hyderabad, Telangana",
+    location: "Bangalore, Karnataka",
     image: projectOffice,
   },
 ];
@@ -101,26 +102,35 @@ export function Portfolio() {
           className="flex justify-center gap-6 mb-12"
         >
           {categories.map((category) => (
-            <motion.button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`text-sm font-body tracking-wide pb-2 transition-all duration-300 relative ${
-                activeCategory === category
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {category}
-              {activeCategory === category && (
-                <motion.span
-                  layoutId="activeTab"
-                  className="absolute bottom-0 left-0 w-full h-px bg-bronze"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
+            <div key={category} className="flex flex-col items-center">
+              <motion.button
+                onClick={() => setActiveCategory(category)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`text-sm font-body tracking-wide pb-2 transition-all duration-300 relative ${
+                  activeCategory === category
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {category}
+                {activeCategory === category && (
+                  <motion.span
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 w-full h-px bg-bronze"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+              </motion.button>
+              {activeCategory === category && category !== "All" && (
+                <Link
+                  to={`/services/${category.toLowerCase()}`}
+                  className="text-[10px] uppercase tracking-widest text-bronze mt-1 hover:underline"
+                >
+                  View Details
+                </Link>
               )}
-            </motion.button>
+            </div>
           ))}
         </motion.div>
 
@@ -138,39 +148,43 @@ export function Portfolio() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
-                className="group cursor-pointer overflow-hidden"
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <motion.img
-                    src={project.image}
-                    alt={`${project.title} - Interior design project by Bavir Interiors in ${project.location}`}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.7 }}
-                  />
-                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500" />
-                  <motion.div
-                    className="absolute inset-0 flex items-end p-6"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                  >
+                <Link
+                  to={`/services/${project.category.toLowerCase()}`}
+                  className="group cursor-pointer overflow-hidden block"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <motion.img
+                      src={project.image}
+                      alt={`${project.title} - Interior design project by Bavir Interiors in ${project.location}`}
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.7 }}
+                    />
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500" />
                     <motion.div
-                      initial={{ y: 20 }}
-                      whileHover={{ y: 0 }}
-                      transition={{ duration: 0.3 }}
+                      className="absolute inset-0 flex items-end p-6"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
                     >
-                      <span className="text-xs uppercase tracking-widest text-background/80 block mb-2 font-body">
-                        {project.category}
-                      </span>
-                      <h3 className="font-heading text-xl text-background font-medium">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-background/80 font-body mt-1">
-                        {project.location}
-                      </p>
+                      <motion.div
+                        initial={{ y: 20 }}
+                        whileHover={{ y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <span className="text-xs uppercase tracking-widest text-background/80 block mb-2 font-body">
+                          {project.category}
+                        </span>
+                        <h3 className="font-heading text-xl text-background font-medium">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-background/80 font-body mt-1">
+                          {project.location}
+                        </p>
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
-                </div>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </AnimatePresence>

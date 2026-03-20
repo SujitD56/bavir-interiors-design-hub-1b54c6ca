@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import bavirLogo from "@/assets/bavir-logo.png";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { label: "Home", href: "/#home" },
@@ -16,9 +17,10 @@ const navLinks = [
 const serviceMenu = [
   { label: "Residential", href: "/services/residential" },
   { label: "Commercial", href: "/services/commercial" },
-  { label: "Modular Kitchen / Wardrobe", href: "/services/modular" },
+  { label: "Modular Kitchen", href: "/services/modular" },
+  { label: "Custom Wardrobes", href: "/services/wardrobe" },
+  { label: "Bathroom Design", href: "/services/bathroom" },
   { label: "Turnkey Solution", href: "/services/turnkey" },
-  { label: "Design Consultation", href: "/services/consultation" },
 ];
 
 export function Navbar() {
@@ -50,20 +52,20 @@ export function Navbar() {
             ${isScrolled ? "min-h-[56px]" : "min-h-[84px]"}
           `}>
           {/* Logo */}
-          <motion.a 
-            href="/#home" 
-            className="flex items-center"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-          >
-            <img 
-              src={bavirLogo} 
-              alt="Bavir Interiors Logo" 
-              className={`w-auto transition-all duration-300
-                ${isScrolled ? "h-16" : "h-20"}
-              `}
-            />
-          </motion.a>
+          <Link to="/#home" className="flex items-center">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img 
+                src={bavirLogo} 
+                alt="Bavir Interiors Logo" 
+                className={`w-auto transition-all duration-300
+                  ${isScrolled ? "h-16" : "h-20"}
+                `}
+              />
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -93,13 +95,13 @@ export function Navbar() {
                     >
                       <div className="flex flex-col px-4 py-3">
                         {serviceMenu.map(service => (
-                          <a
+                          <Link
                             key={service.label}
-                            href={service.href}
+                            to={service.href}
                             className="py-2 text-sm text-gray-700 hover:text-black transition-colors"
                           >
                             {service.label}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>

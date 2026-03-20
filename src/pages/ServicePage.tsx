@@ -1,9 +1,24 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { serviceProjects, serviceContent, serviceProcess  } from "../data/service";
 
 type ServiceType = keyof typeof serviceProjects;
+
+interface ServiceContent {
+  title: string;
+  mainImage?: string;
+  subtitle?: string;
+  description: string;
+  services: string[];
+  highlights: string[];
+  whatIsTitle?: string;
+  whatIsDescription?: string;
+  layouts?: { name: string; description: string }[];
+  trends?: string[];
+  costInfo?: string;
+  footerText?: string;
+}
 
 type Project = {
   id: number;
@@ -15,36 +30,181 @@ type Project = {
 
 export default function ServicePage() {
   const { type } = useParams<{ type: ServiceType }>();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const projects = type ? serviceProjects[type] : null;
-  const content = type ? serviceContent[type] : null;
+  const content = type ? (serviceContent[type] as ServiceContent) : null;
 
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   if (!projects || !content) {
     return <div className="pt-32 text-center">Service not found</div>;
   }
 
   return (
-    <>
-      <section className="pt-32 section-padding bg-secondary">
-        <div className="max-w-7xl mx-auto space-y-20">
+    <div ref={containerRef} className="bg-secondary/30 min-h-screen">
+      {/* =====================
+          HERO / INTRO (FULL SCREEN)
+      ====================== */}
+      {content.mainImage ? (
+        <section className="relative h-[70vh] w-full overflow-hidden">
+          <motion.div 
+            style={{ y }}
+            className="absolute inset-0 z-0"
+          >
+            <img 
+              src={content.mainImage} 
+              alt={content.title}
+              className="w-full h-full object-cover scale-110"
+            />
+            <div className="absolute inset-0 bg-black/40" />
+          </motion.div>
 
-          {/* =====================
-              HERO / INTRO
-          ====================== */}
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="max-w-5xl"
+            >
+              <p className="text-bronze font-medium uppercase tracking-[0.4em] mb-2 text-[10px] drop-shadow-lg">
+                {content.subtitle || "Premium Interiors"}
+              </p>
+              <h1 className="text-2xl md:text-3xl lg:text-5xl font-heading font-medium tracking-tight mb-2 drop-shadow-2xl">
+                {content.title}
+              </h1>
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "50px" }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="h-1 bg-bronze mx-auto mb-2"
+              />
+            </motion.div>
+
+            {/* Scroll Indicator */}
+            <motion.div 
+              style={{ opacity }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            >
+              <span className="text-[10px] uppercase tracking-[0.3em] font-light">Scroll Explore</span>
+              <div className="w-px h-12 bg-white/30 relative">
+                <div className="absolute top-0 left-0 w-full h-1/2 bg-bronze" />
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      ) : (
+        <section className="pt-32 section-padding bg-secondary">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="section-title"
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-medium"
             >
               {content.title}
             </motion.h1>
-            <p className="mt-4 text-muted-foreground text-lg">
-              {content.description}
-            </p>
+            {content.subtitle && (
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-xl text-bronze font-medium italic"
+              >
+                {content.subtitle}
+              </motion.p>
+            )}
           </div>
+        </section>
+      )}
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-24 space-y-32">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-muted-foreground text-lg leading-relaxed lg:text-2xl font-light italic"
+          >
+            "{content.description}"
+          </motion.p>
+        </div>
+
+          {/* =====================
+              WHAT IS SECTION
+          ====================== */}
+          {content.whatIsDescription && (
+            <div className="bg-white p-8 lg:p-12 rounded-[2rem] border border-border/50">
+              <div className="max-w-4xl mx-auto space-y-6 text-center">
+                <h2 className="text-3xl font-heading font-semibold">
+                  {content.whatIsTitle || `About Our ${content.title}`}
+                </h2>
+                <p className="text-muted-foreground leading-relaxed text-lg">
+                  {content.whatIsDescription}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* =====================
+              LAYOUTS SECTION
+          ====================== */}
+          {content.layouts && (
+            <div className="space-y-12">
+              <div className="text-center">
+                <h2 className="text-3xl font-heading font-semibold">
+                  Popular <span className="text-bronze">Layouts</span> We Offer
+                </h2>
+                <p className="mt-4 text-muted-foreground">Tailored configurations to suit your space and lifestyle.</p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {content.layouts.map((layout, i) => (
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="p-8 bg-secondary/30 rounded-2xl border border-bronze/5 hover:border-bronze/30 transition-all group"
+                  >
+                    <h3 className="text-xl font-heading font-semibold mb-3 group-hover:text-bronze transition-colors">
+                      {layout.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {layout.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* =====================
+              TRENDS (Conditional)
+          ====================== */}
+          {content.trends && (
+            <div className="space-y-12">
+              <div className="text-center">
+                 <h2 className="text-3xl font-heading font-semibold">
+                  Latest Design <span className="text-bronze">Trends (2026)</span>
+                </h2>
+                <p className="mt-4 text-muted-foreground">Stay ahead with the newest kitchen trends curated by our experts.</p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {content.trends.map((trend, i) => (
+                  <div key={i} className="p-6 bg-secondary/30 rounded-xl border border-border flex items-center gap-3">
+                    <div className="w-2 h-2 bg-bronze rounded-full" />
+                    <span className="text-foreground/80">{trend}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* =====================
               WHY CHOOSE US
@@ -208,9 +368,32 @@ export default function ServicePage() {
 
        </div>
 
-        </div>
-      </section>
-      
+        {/* =====================
+            FOOTER CTA
+        ====================== */}
+        {content.footerText && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="rounded-[2rem] bg-foreground text-background p-12 lg:p-20 text-center space-y-8 mt-20"
+          >
+            <h3 className="text-2xl md:text-3xl font-heading font-medium leading-relaxed max-w-4xl mx-auto">
+              {content.footerText}
+            </h3>
+            {content.costInfo && (
+              <p className="text-background/80 text-lg">{content.costInfo}</p>
+            )}
+            <div className="flex justify-center">
+              <a href="#contact">
+                <button className="bg-bronze text-white px-8 py-4 rounded-full font-heading text-lg hover:bg-bronze/90 transition-all flex items-center gap-2">
+                  Book a Free Consultation Today
+                </button>
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </div>
 
       {/* =====================
           POPUP MODAL GALLERY
@@ -272,7 +455,6 @@ export default function ServicePage() {
           </motion.div>
         )}
       </AnimatePresence>
-      
-    </>
+    </div>
   );
 }
