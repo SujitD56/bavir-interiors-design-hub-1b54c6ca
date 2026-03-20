@@ -6,7 +6,8 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ChatBot } from "./components/common/chatBot";
-import ServicePage from "./pages/ServicePage";
+import UnifiedServicePage from "./pages/UnifiedServicePage";
+import ModularKitchen from "./pages/ModularKitchen/ModularKitchen";
 import MainLayout from "./components/layout/MainLayout";
 
 import { LeadProvider } from "./context/LeadContext";
@@ -26,7 +27,8 @@ const App = () => (
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Index />} />
-              <Route path="/services/:type" element={<ServicePage />} />
+              <Route path="/services/modular" element={<ModularKitchen />} />
+              <Route path="/services/:type" element={<UnifiedServicePage />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />
