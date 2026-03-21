@@ -99,7 +99,7 @@ export function Hero() {
           className="font-heading text-4xl md:text-6xl lg:text-7xl font-medium leading-tight mb-6 text-background"
         >
           Transforming Spaces into{" "}
-          <span className="italic text-bronze">Timeless</span> Interiors
+          <span className="italic text-[#D4AF37] drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)]">Timeless</span> Interiors
         </motion.h1>
 
         <motion.p

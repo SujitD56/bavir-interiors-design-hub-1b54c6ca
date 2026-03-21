@@ -13,9 +13,7 @@ import {
   BookOpen, 
   Baby, 
   Layers, 
-  Users,
-  Plus,
-  Minus
+  Users
 } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -152,11 +150,8 @@ const cardVariants = {
 };
 
 export function Services() {
-  const [showAll, setShowAll] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const visibleServices = showAll ? services : services.slice(0, 6);
 
   return (
     <section id="services" className="section-padding" ref={ref}>
@@ -194,17 +189,16 @@ export function Services() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8"
         >
-          <AnimatePresence mode="popLayout">
-            {visibleServices.map(service => (
+          <AnimatePresence>
+            {services.map(service => (
               <motion.div
                 key={service.title}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3 }}
               >
                 <Link
                   to={service.href}
@@ -245,26 +239,6 @@ export function Services() {
             ))}
           </AnimatePresence>
         </motion.div>
-
-        {/* View More Button */}
-        <div className="mt-16 text-center">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => setShowAll(!showAll)}
-            className="group border-bronze/30 hover:border-bronze text-bronze hover:bg-bronze hover:text-white transition-all duration-300 rounded-full px-8"
-          >
-            {showAll ? (
-              <span className="flex items-center gap-2">
-                Show Less <Minus size={16} />
-              </span>
-            ) : (
-              <span className="flex items-center gap-2">
-                View All Services <Plus size={16} className="group-hover:rotate-180 transition-transform duration-500" />
-              </span>
-            )}
-          </Button>
-        </div>
       </div>
     </section>
   );

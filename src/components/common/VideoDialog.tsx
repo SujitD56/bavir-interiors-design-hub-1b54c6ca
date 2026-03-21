@@ -23,7 +23,7 @@ export function VideoDialog({ trigger }: VideoDialogProps) {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-none">
+      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-none [&>button]:text-white [&>button]:opacity-100 [&>button]:z-50 [&>button]:bg-black/20 [&>button]:hover:bg-black/40 [&>button]:rounded-full [&>button]:p-1">
         <DialogHeader className="p-4 absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity">
           <DialogTitle className="text-white font-heading">Our Brand Story</DialogTitle>
         </DialogHeader>
